@@ -36,5 +36,4 @@ void loop() {
   pixels.setPixelColor(led, pixels.Color(255, 0, 255));
   pixels.show();   // Send the updated pixel colors to the hardware.
   delay(DELAYVAL); // Pause before next pass through loop
-  pixels.setPixelColor(led, pixels.Color(0, 0, 0));
 }
