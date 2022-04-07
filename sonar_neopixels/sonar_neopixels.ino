@@ -25,6 +25,12 @@ Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
 #define DELAYVAL 50 // Time (in milliseconds) to pause between pixels
 
+
+#define SMOOTH_ALPHA 0.7
+
+float smoothVal = 0; // global for the smoothing function
+
+
 void setup() {
   pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
 }
@@ -32,8 +38,14 @@ void setup() {
 void loop() {
   pixels.clear(); // Set all pixel colors to 'off'
   int dist = distanceSensor.measureDistanceCm(); // afstand van de sensor in cm 
-  int led = map(dist, 3, 100, 0, NUMPIXELS ); // map de afstand in cm (3-100cm) naar een led op de strip
+  int led = smooth(map(dist, 3, 100, 0, NUMPIXELS )); // map de afstand in cm (3-100cm) naar een led op de strip
   pixels.setPixelColor(led, pixels.Color(255, 0, 255));
   pixels.show();   // Send the updated pixel colors to the hardware.
   delay(DELAYVAL); // Pause before next pass through loop
+}
+
+// returns the value smoothed with an exponential filter
+float smooth(long rawVal) {
+  smoothVal = ((float)rawVal * SMOOTH_ALPHA) + (smoothVal * (1 - SMOOTH_ALPHA));
+  return smoothVal;
 }
