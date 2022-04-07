@@ -1,4 +1,4 @@
-// De potmeter wordt alsvolgt aangesloten: 
+// De potmeter wordt als volgt aangesloten: 
 // Pot -> Arduino
 // 1 -> GND
 // 2 -> A0

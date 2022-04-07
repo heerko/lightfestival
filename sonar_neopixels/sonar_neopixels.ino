@@ -1,7 +1,7 @@
 // Installeer de HCSR04 library 
 // Sketch > Include Libary > Manage Libraries 
 // Zoek naar "HCSR04" het is de library gemaakt door Martin Sosic 
-// De sensor wordt alsvolgt aangesloten: 
+// De sensor wordt als volgt aangesloten: 
 // Sensor -> Arduino
 // GND -> GND
 // Echo -> 12
@@ -17,7 +17,7 @@ UltraSonicDistanceSensor distanceSensor(13, 12);
 #define PIN        6
 
 // How many NeoPixels are attached to the Arduino?
-#define NUMPIXELS 44
+#define NUMPIXELS 30
 
 // When setting up the NeoPixel library, we tell it how many pixels,
 // and which pin to use to send signals.
