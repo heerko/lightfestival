@@ -7,10 +7,10 @@
 #include <Adafruit_NeoPixel.h>
 
 // Choose your prefered pixmap
-#include "heart24.h"
+//#include "heart24.h"
 //#include "yellowsmiley24.h"
 //#include "bluesmiley24.h"
-//#include "smileytongue24.h"
+#include "smileytongue24.h"
 
 // Which pin on the Arduino is connected to the NeoPixels?
 #define LED_PIN    6
