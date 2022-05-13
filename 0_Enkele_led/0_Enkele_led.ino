@@ -2,6 +2,11 @@
  *  Super basic voorbeeld. We laten de eerste led van de strip rood/groen knipperen. 
  *  
  *  De ledstrip is aangesloten op 5V, GND en de data pin van de strip op pin 6 van de Arduino
+ *  
+ *  Oefening: 
+ *  - Zorg dat een andere pixel van kleur veranderd. 
+ *  - Kan je ook twee pixel van kleur laten veranderen?
+ *  - Hoe verander je de kleuren?
  */
 
 // laad de NeoPixel library

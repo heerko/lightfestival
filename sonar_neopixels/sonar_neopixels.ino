@@ -8,23 +8,26 @@
 // Trig -> 13
 // VCC -> 5V
 
+// laad de NeoPixel library
 #include <Adafruit_NeoPixel.h>
+// laad de sonar library
 #include <HCSR04.h>
 
+// instantieer de ultrasoon sensor
 UltraSonicDistanceSensor distanceSensor(13, 12);
 
-// Which pin on the Arduino is connected to the NeoPixels?
+// de ledstrip heeft 3 draden. 2 zijn verbonden met 5V en GND, de laatste gaat naar pin 6.
 #define PIN        6
 
-// How many NeoPixels are attached to the Arduino?
+// Hoeveel leds zitten er op de strip?
 #define NUMPIXELS 30
 
-// When setting up the NeoPixel library, we tell it how many pixels,
-// and which pin to use to send signals.
+// Vertel je de Arduino dat je een Neopixel strip hebt aangesloten
+// Hiervoor heeft de library drie argumenten nodig:
+// - hoeveel pixels, dat hebben we hierboven opgeslagen in de constant NUMPIXELS
+// - welke pin, dat is de constante PIN
+// - en het laatste geeft de soort neopixels aan. Dit kan je meestal gewoon copy/pasten
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
-
-#define DELAYVAL 50 // Time (in milliseconds) to pause between pixels
-
 
 #define SMOOTH_ALPHA 0.7
 
@@ -32,19 +35,27 @@ float smoothVal = 0; // global for the smoothing function
 
 
 void setup() {
-  pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  pixels.begin(); // "start" de library
 }
 
 void loop() {
-  pixels.clear(); // Set all pixel colors to 'off'
+  pixels.clear(); // Alle pixels op zwart (uit)
+  
   int dist = distanceSensor.measureDistanceCm(); // afstand van de sensor in cm 
-  int led = smooth(map(dist, 3, 100, 0, NUMPIXELS )); // map de afstand in cm (3-100cm) naar een led op de strip
+
+  // map de afstand in cm (3-100cm) naar een led op de strip
+  // de smooth functie zorgt ervoor dat de ruis een beetje 
+  // afgevlakt wordt door een rollend gemiddelde van de
+  // laatste paar metingen te maken.
+  int led = smooth(map(dist, 3, 100, 0, NUMPIXELS )); 
+
+  // alleen de led corresponderend met de gemeten afstand gaat aan.
   pixels.setPixelColor(led, pixels.Color(255, 0, 255));
-  pixels.show();   // Send the updated pixel colors to the hardware.
-  delay(DELAYVAL); // Pause before next pass through loop
+  
+  pixels.show();  // Stuur de data naar de strip
+  delay(500); // Even wachten
 }
 
-// returns the value smoothed with an exponential filter
 float smooth(long rawVal) {
   smoothVal = ((float)rawVal * SMOOTH_ALPHA) + (smoothVal * (1 - SMOOTH_ALPHA));
   return smoothVal;

@@ -1,38 +1,46 @@
-// NeoPixel Ring simple sketch (c) 2013 Shae Erisson
-// Released under the GPLv3 license to match the rest of the
-// Adafruit NeoPixel library
-
+/*
+ * In dit voorbeeld worden de pixels om de beurt groen
+ * dvm een loop.
+ * 
+ * Oefeningen: 
+ * - Hoe verander je de kleur?
+ * - Hoe verander je de snelheid waarmee het lichtje over de strip beweegt?
+ * - Hoe kan je het lichtje maar toch halverwege de strip laten gaan?
+ */
+// laad de NeoPixel library
 #include <Adafruit_NeoPixel.h>
 
-// Which pin on the Arduino is connected to the NeoPixels?
+// de ledstrip heeft 3 draden. 2 zijn verbonden met 5V en GND, de laatste gaat naar pin 6.
 #define PIN        6 
 
-// How many NeoPixels are attached to the Arduino?
+// Hoeveel leds zitten er op de strip?
 #define NUMPIXELS 30
 
-// When setting up the NeoPixel library, we tell it how many pixels,
-// and which pin to use to send signals. 
+// Vertel je de Arduino dat je een Neopixel strip hebt aangesloten
+// Hiervoor heeft de library drie argumenten nodig:
+// - hoeveel pixels, dat hebben we hierboven opgeslagen in de constant NUMPIXELS
+// - welke pin, dat is de constante PIN
+// - en het laatste geeft de soort neopixels aan. Dit kan je meestal gewoon copy/pasten
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
-#define DELAYVAL 500 // Time (in milliseconds) to pause between pixels
-
 void setup() {
-  pixels.begin(); // INITIALIZE NeoPixel strip object (REQUIRED)
+  pixels.begin(); // "start" de library
 }
 
 void loop() {
-  pixels.clear(); // Set all pixel colors to 'off'
-  // The first NeoPixel in a strand is #0, second is 1, all the way up
-  // to the count of pixels minus one.
-  for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
-    // pixels.Color() takes RGB values, from 0,0,0 up to 255,255,255
-    // Here we're using a moderately bright green color:
+  // Zet voor de zekerheid alle pixels op zwart.
+  pixels.clear();
+  // De for-loop hieronder maakt een 'teller' met de variablenaam i.
+  // De teller telt van 0 tot de laatste pixel (i< NUMPIXELS)
+  // aan het einde van elke loop wordt i 1 hoger (i++) 
+  for(int i=0; i<NUMPIXELS; i++) { 
+    // maak de 'i-ste' pixel groen.  
     pixels.setPixelColor(i, pixels.Color(0, 150, 0));
-
-    pixels.show();   // Send the updated pixel colors to the hardware.
-
-    delay(DELAYVAL); // Pause before next pass through loop
-
+    // stuur het naar de strip;
+    pixels.show();
+    // wacht heel even
+    delay(500);
+    // en zet de pixel weer uit.
     pixels.setPixelColor(i, pixels.Color(0, 0, 0));
   }
 }
