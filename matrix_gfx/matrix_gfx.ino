@@ -60,7 +60,7 @@ Adafruit_NeoMatrix *matrix = new Adafruit_NeoMatrix(mw, mh,
     LED_PIN,
     NEO_MATRIX_TOP     + NEO_MATRIX_LEFT +
     NEO_MATRIX_ROWS + NEO_MATRIX_ZIGZAG,
-    NEO_GRB            + NEO_KHZ800 );
+    NEO_RGBW            + NEO_KHZ800 );
 
 // Scroll within big bitmap so that all if it becomes visible or bounce a small one.
 // If the bitmap is bigger in one dimension and smaller in the other one, it will
