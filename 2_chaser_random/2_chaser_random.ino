@@ -1,9 +1,10 @@
 /*
- * Dit voorbeeld doet vrijwel hetzelfde als 1_Chaser maar
- * er wordt steeds een random kleur gekozen voor elke pixel.
+ * Dit voorbeeld doet vrijwel hetzelfde als 1_Chaser maar 
+ * de code is iets anders geschreven. 
+ * En er wordt steeds een random kleur gekozen voor elke pixel.
  * 
  * Oefening:
- * - Probeer 'vuur' te maken
+ * - Probeer 'vuur' te maken door de kleuren aan te passen
  * - Probeer 'water' te maken
  */
 
@@ -31,9 +32,9 @@ void setup() {
 void loop() {
   // Zet voor de zekerheid alle pixels op zwart.
   pixels.clear();
-  // De for-loop hieronder maakt een 'teller' met de variablenaam i.
+  // De for-loop hieronder maakt een 'teller' met de variablenaam "i".
   // De teller telt van 0 tot de laatste pixel (i< NUMPIXELS)
-  // aan het einde van elke loop wordt i 1 hoger (i++) 
+  // aan het einde van elke loop wordt "i" 1 hoger (i++) 
   for(int i=0; i<NUMPIXELS; i++) { // For each pixel...
     // maak de 'i-ste' pixel een random kleur.  
     // elk kleurkanaal kan een waarde hebben tussen 0 en 255.

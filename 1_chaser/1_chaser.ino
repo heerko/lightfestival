@@ -5,7 +5,7 @@
  * Oefeningen: 
  * - Hoe verander je de kleur?
  * - Hoe verander je de snelheid waarmee het lichtje over de strip beweegt?
- * - Hoe kan je het lichtje maar toch halverwege de strip laten gaan?
+ * - Hoe kan je het lichtje maar tot halverwege de strip laten gaan?
  */
 // laad de NeoPixel library
 #include <Adafruit_NeoPixel.h>
@@ -23,24 +23,25 @@
 // - en het laatste geeft de soort neopixels aan. Dit kan je meestal gewoon copy/pasten
 Adafruit_NeoPixel pixels(NUMPIXELS, PIN, NEO_GRB + NEO_KHZ800);
 
+int pixelCnt = 0; // dit is een teller waarin we gaan bijhouden welke pixel een kleur moet krijgen
+
 void setup() {
   pixels.begin(); // "start" de library
 }
 
 void loop() {
-  // Zet voor de zekerheid alle pixels op zwart.
+  // We beginnen met alle pixels op zwart.
   pixels.clear();
-  // De for-loop hieronder maakt een 'teller' met de variablenaam i.
-  // De teller telt van 0 tot de laatste pixel (i< NUMPIXELS)
-  // aan het einde van elke loop wordt i 1 hoger (i++) 
-  for(int i=0; i<NUMPIXELS; i++) { 
-    // maak de 'i-ste' pixel groen.  
-    pixels.setPixelColor(i, pixels.Color(0, 150, 0));
-    // stuur het naar de strip;
-    pixels.show();
-    // wacht heel even
-    delay(500);
-    // en zet de pixel weer uit.
-    pixels.setPixelColor(i, pixels.Color(0, 0, 0));
+  // geef de huidige (waarde van pixelCnt) pixel een kleur
+  pixels.setPixelColor(pixelCnt, pixels.Color(0, 100, 50));
+  // tel 1 op bij pixelCnt, zodat de volgende loop we de volgende pixel gaan gebruiken
+  pixelCnt = pixelCnt + 1;
+  // aan het einde van de strip beginnen we opnieuw
+  if(pixelCnt > NUMPIXELS) {
+    pixelCnt = 0;
   }
+  // pixels.show(); moet altijd, de data wordt dan pas naar de strip verzonden. 
+  pixels.show();
+  // even wachten anders gaat het te snel.
+  delay(50);
 }

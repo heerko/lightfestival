@@ -1,44 +1,31 @@
-// A basic everyday NeoPixel strip test program.
-
-// NEOPIXEL BEST PRACTICES for most reliable operation:
-// - Add 1000 uF CAPACITOR between NeoPixel strip's + and - connections.
-// - MINIMIZE WIRING LENGTH between microcontroller board and first pixel.
-// - NeoPixel strip's DATA-IN should pass through a 300-500 OHM RESISTOR.
-// - AVOID connecting NeoPixels on a LIVE CIRCUIT. If you must, ALWAYS
-//   connect GROUND (-) first, then +, then data.
-// - When using a 3.3V microcontroller with a 5V-powered NeoPixel strip,
-//   a LOGIC-LEVEL CONVERTER on the data line is STRONGLY RECOMMENDED.
-// (Skipping these may work OK on your workbench but can fail in the field)
-
+/*
+ * Dit programma laat een regenboog effect zien op een NeoPixel LED strip. 
+ * De strip is aangesloten op pin 6 van de Arduino.
+ */
+ 
 #include <Adafruit_NeoPixel.h>
 
-// Which pin on the Arduino is connected to the NeoPixels?
 #define LED_PIN    6
-
-// How many NeoPixels are attached to the Arduino?
 #define LED_COUNT 30
 
-// Declare our NeoPixel strip object:
 Adafruit_NeoPixel strip(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void setup() {
-  strip.begin();           // INITIALIZE NeoPixel strip object (REQUIRED)
-  strip.show();            // Turn OFF all pixels ASAP
-  strip.setBrightness(10); // Set BRIGHTNESS to about 1/5 (max = 255)
+  strip.begin();           // Initialiseer de NeoPixel strip
+  strip.show();            // Schakel alle pixels direct uit
+  strip.setBrightness(10); // Stel de helderheid in op ongeveer 1/5 (max = 255)
 }
 
 void loop() {
- // Flowing rainbow cycle along the whole strip
- for(long firstPixelHue = 0; firstPixelHue < 65536; firstPixelHue += 256) {
-    // strip.rainbow() can take a single argument (first pixel hue) or
-    // optionally a few extras: number of rainbow repetitions (default 1),
-    // saturation and value (brightness) (both 0-255, similar to the
-    // ColorHSV() function, default 255), and a true/false flag for whether
-    // to apply gamma correction to provide 'truer' colors (default true).
-    strip.rainbow(firstPixelHue);
-    // Above line is equivalent to:
-    // strip.rainbow(firstPixelHue, 1, 255, 255, true);
-    strip.show(); // Update strip with new contents
-    delay(10);  // Pause for a moment
+  // Kleurencyclus door de hele strip
+  for (long eerstePixelHue = 0; eerstePixelHue < 65536; eerstePixelHue += 256) {
+    // Met strip.rainbow() kun je een kleurencyclus door de strip laten lopen. 
+    // De functie kan een enkel argument accepteren (de kleur van de eerste pixel) of 
+    // optioneel een aantal extra argumenten accepteren, zoals het aantal kleurencyclus herhalingen (standaard 1),
+    // saturatie en waarde (helderheid) (beide 0-255, vergelijkbaar met de ColorHSV() functie, standaard 255),
+    // en een true/false vlag om gamma-correctie toe te passen voor "echtere" kleuren (standaard waar).
+    strip.rainbow(eerstePixelHue);
+    strip.show(); // Stuur de data naar de strip
+    delay(10);  // Even wachten
   }
 }
