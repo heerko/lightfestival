@@ -1,4 +1,4 @@
-#Lightfestival
+# Lightfestival
 
 Voorbeeldbestanden voor HKU lichtfestival.
 
@@ -6,6 +6,8 @@ In deze repository vindt je een aantal voorbeelden voor het werken met neopixels
 De eerste voorbeelden hebben een aantal 'opdrachten' in comments in de code, deze zou je kunnen gebruiken om de code te leren kennen.
 
 Je kan deze repo downloaden met groene de knop "<> Code" rechtsboven, klik daarop, en klik dan op Download Zip. Je kan natuurlijk ook kopieren en plakken als dat meer je ding is :)
+
+Om de voorbeelden te kunnen compileren moet je de Adafruit Neopixel library installeren. Dat doe je door in de Arduino IDE naar Sketch > Include Library > Manage Libaries te gaan en daar te zoeken naar "Adafruit Neopixel" en [Install] te klikken.
 
 Hieronder de nette manier om een ledstrip aan te sluiten. De weerstand beschermt 
 ![basis breadboard setup](images/Neopixels%20basic.png)
