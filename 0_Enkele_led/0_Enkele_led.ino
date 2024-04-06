@@ -17,7 +17,7 @@
 
 // Hoeveel leds zitten er op de strip?
 // in dit voorbeeld gebruiken we alleen de eerste...
-#define NUMPIXELS 30
+#define NUMPIXELS 1
 
 // Vertel je de Arduino dat je een Neopixel strip hebt aangesloten
 // Hiervoor heeft de library drie argumenten nodig:
